@@ -1,13 +1,8 @@
-import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { users } from "../data/mock";
 import { useAuth } from "../context/contextHooks";
-
-interface LoginFormInputs {
-  username: string;
-  password: string;
-}
+import type { LoginFormInputs } from "../types";
+import { LoginUser } from "../api/auth/authApi";
 
 function Login() {
   const { userLogin } = useAuth();
@@ -19,25 +14,24 @@ function Login() {
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
 
-  const onSubmit = (data: LoginFormInputs) => {
+  const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const user = users.find(
-        (u) => u.username === data.username && u.password === data.password
-      );
+      const res = await LoginUser(data);
 
-      if (!user) {
-        throw new Error("Invalid username or password");
-      }
+      const user = res.data.user;
 
-      console.log("Login successful:", user);
       userLogin(user);
       navigate("/", { replace: true });
     } catch (err: any) {
       //this any type is temporary for small forms.
       // Show error in the form
+
+      const message =
+        err.response?.data?.message || err.message || "Something went wrong";
+
       setError("root", {
         type: "manual",
-        message: err.message,
+        message: message,
       });
     }
   };

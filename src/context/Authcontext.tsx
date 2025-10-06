@@ -4,14 +4,18 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
-import type { User } from "../data/mock";
 import { useNavigate } from "react-router-dom";
+import type { User } from "../types";
+import { setTask } from "../features/tasks/taskSlice";
+import { useDispatch } from "react-redux";
 
 type AuthContextProvider = {
   login: User | null;
   userLogin: (data: User) => void;
   userLogout: () => void;
 };
+
+// const dispatch=useDispatch()
 
 export const AuthContext = createContext<AuthContextProvider | undefined>(
   undefined
@@ -36,6 +40,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     console.log("userlogout");
     localStorage.removeItem("USER_DATA");
     setLogin(null);
+    // dispatch(setTask([]));
     navigate("/login", { replace: true });
   };
 

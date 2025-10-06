@@ -26,7 +26,7 @@ function App() {
             >
               <Route index element={<NewTask />} />
               <Route path="completed" element={<CompletedTasks />} />
-              <Route path="deleted" element={<DeletedTasks />} />
+              <Route path="finished" element={<DeletedTasks />} />
             </Route>
             <Route element={<SimpleLayout />}>
               <Route path="login" element={<Login />} />

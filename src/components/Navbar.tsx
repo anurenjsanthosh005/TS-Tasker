@@ -26,7 +26,7 @@ const {login,userLogout}=useAuth()
             COMPLETED
           </NavLink>
           <NavLink
-            to="/deleted"
+            to="/finished"
             className={({ isActive }) =>
               isActive ? "text-blue-600 font-bold" : "text-gray-600"
             }

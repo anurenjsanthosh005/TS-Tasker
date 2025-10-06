@@ -10,8 +10,9 @@ function CompletedTasks() {
         buttonConfig={{
           showComplete: false,
           showRedo: true,
-          showDelete: true,
+          showDelete: false,
           showEdit: false,
+          showDone:true
         }}
       />
     </div>

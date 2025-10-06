@@ -7,7 +7,7 @@ type ButtonPropType = {
 };
 
 function Button(props: ButtonPropType) {
-  const { children, onClick, type = "" } = props;
+  const { children, type = "",onClick } = props;
   return (
     <div
       className={`flex justify-center items-center gap-3  ${
